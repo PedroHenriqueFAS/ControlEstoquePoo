@@ -47,17 +47,29 @@ class Estoque:
         for id, produto in self.produtos.items(): # iterando sobre os itens do dicionário
             print(f'ID: {id}, Nome: {produto["nome"]}, quantidade: {produto["quantidade"]} unidades')
             
-class Produto:
+class Descricao:
+    def __init__(self, peso, tamanho, detalhes):
+        self.peso = peso
+        self.tamanho = tamanho
+        self.detalhes = detalhes
+        
+    def exibe_detalhes(self):
+        print(self.detalhes)
+        
+class Produto(Descricao):
     
-    def __init__(self, nome, quantidade):
+    def __init__(self, nome, quantidade, peso, tamanho, detalhes):
+        super().__init__(peso, tamanho, detalhes)
         self.nome = nome
         self.quantidade = quantidade
         self.descricao = 'VAZIO POR PADRAO'
-    
+  
 e1 = Estoque('Amazon', 1000)
 e2 = Estoque('Americanas', 800)
 
-p1 = Produto('Borracha', 20)
+p1 = Produto('Borracha', 20, 30, 100, 'VAZIO')
+
+p1.exibe_detalhes()
 
 ed = Predio('Amorim', 'Educacao', 20)
 
