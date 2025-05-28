@@ -3,7 +3,12 @@ class Estoque:
         self.nome = nome
         self.espaco = capacidade_maxima
         self.produtos = {}
+        self.produtos2 = {}
         self.endereco = ''
+        
+    def add_produto2(self, id, produto):
+        if id in self.produtos2:
+            self.produtos2[id] = produto
         
     def add_produto(self, id, nome, quantidade):
         if id in self.produtos:
@@ -29,9 +34,17 @@ class Estoque:
         print(f'Estado do estoque atual {self.nome}: \n')
         for id, produto in self.produtos.items(): # iterando sobre os itens do dicionário
             print(f'ID: {id}, Nome: {produto["nome"]}, quantidade: {produto["quantidade"]} unidades')
+            
+class Produto:
+    
+    def __init__(self, nome, quantidade):
+        self.nome = nome
+        self.quantidade = quantidade
     
 e1 = Estoque('Amazon', 1000)
 e2 = Estoque('Americanas', 800)
+
+p1 = Produto('Borracha', 20)
 
 e1.add_produto('20', 'Caneta', 30)
 e1.add_produto('30', 'Lapis', 30)
