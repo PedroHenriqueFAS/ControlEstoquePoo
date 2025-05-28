@@ -1,3 +1,15 @@
+class Predio: 
+    
+    def __init__(self, nome, endereco, espacos_vazios):
+        self.nome = nome
+        self.endereco = endereco
+        self.espacos_vazios = espacos_vazios
+        self.estoques = {}
+        
+    def cria_estoque(self, id, nome, capacidade_maxima):
+        if not id in self.estoques:
+            self.estoques[id] = Estoque(nome, capacidade_maxima)
+
 class Estoque:
     def __init__(self, nome, capacidade_maxima):
         self.nome = nome
@@ -7,7 +19,7 @@ class Estoque:
         self.endereco = ''
         
     def add_produto2(self, id, produto):
-        if id in self.produtos2:
+        if not id in self.produtos2:
             self.produtos2[id] = produto
         
     def add_produto(self, id, nome, quantidade):
@@ -40,11 +52,23 @@ class Produto:
     def __init__(self, nome, quantidade):
         self.nome = nome
         self.quantidade = quantidade
+        self.descricao = 'VAZIO POR PADRAO'
     
 e1 = Estoque('Amazon', 1000)
 e2 = Estoque('Americanas', 800)
 
 p1 = Produto('Borracha', 20)
+
+ed = Predio('Amorim', 'Educacao', 20)
+
+ed.cria_estoque('30', 'Reciclagem', 1000)
+
+ed.estoques['30'].add_produto2('10', p1)
+
+print(ed.estoques['30'].produtos2['10'].nome)
+
+e1.add_produto2('20', p1)
+print(e1.produtos2['20'].descricao)
 
 e1.add_produto('20', 'Caneta', 30)
 e1.add_produto('30', 'Lapis', 30)
