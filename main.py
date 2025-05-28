@@ -10,6 +10,9 @@ class Estoque:
             if self.produtos[id]['nome'] != nome:
                 print(f'Erro: ID {id} já existe para o produto {self.produtos[id]["nome"]}.')
                 return None
+            if quantidade > self.espaco:
+                print('O estoque não tem espaço suficiente para adicionar este produto.')
+                return None #retorna nada se não houver espaço
             self.produtos[id]['quantidade'] += quantidade
         else:
             self.produtos[id] = {'nome':nome, 'quantidade': quantidade}
@@ -23,7 +26,9 @@ class Estoque:
             print(f'Existem {produto["quantidade"]} unidades de {produto["nome"]} no estoque {self.nome}')
 
     def mostra_estoque(self):
-        pass
+        print(f'Estado do estoque atual {self.nome}: \n')
+        for id, produto in self.produtos.items(): # iterando sobre os itens do dicionário
+            print(f'ID: {id}, Nome: {produto["nome"]}, quantidade: {produto["quantidade"]} unidades')
     
 e1 = Estoque('Amazon', 1000)
 e2 = Estoque('Americanas', 800)
@@ -31,3 +36,4 @@ e2 = Estoque('Americanas', 800)
 e1.add_produto('20', 'Caneta', 30)
 e1.add_produto('30', 'Lapis', 30)
 e1.buscar_produto('20')
+e1.mostra_estoque()
